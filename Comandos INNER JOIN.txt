@@ -1,0 +1,27 @@
+
+    SELECT 
+     SUM(I.Quantidade) As Quantidade_Vendida,
+     P.Nome As Nome_Produto
+FROM
+    Item_Pedido_Venda As I
+    INNER JOIN Produto As P ON I.Codigo_Produto = P.Codigo
+    GROUP BY P.Nome 
+
+
+Juntando mais tabelas
+
+--juntando mais que duas tabelas
+SELECT
+	SUM(I.Quantidade) As Quantidade,
+    P.Nome As [Nome do Produto],
+    M.Nome As [Nome do Marca]
+FROM
+	Item_Pedido_Venda As I
+	INNER JOIN Produto As P ON I.Codigo_Produto = P.Codigo
+    INNER JOIN Marca As M ON M.Codigo = P.Codigo_Marca
+GROUP BY
+    P.Nome,
+    M.Nome
+ORDER BY
+    P.Nome Asc
+ou SUM(I.Quantidade) ASC

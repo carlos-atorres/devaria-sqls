@@ -1,0 +1,27 @@
+SELECT
+    C.Nome,
+    C.Celular
+--F.Pontos removido para não listar na tabela
+FROM
+    Cliente AS C
+    LEFT JOIN Fidelidade As F ON C.Codigo = F.Codigo_Cliente
+WHERE 
+    F.Pontos IS NULL
+
+
+
+SELECT
+    P.Codigo As [Código do Produto],
+    P.Nome As [Nome do Produto],
+    CASE
+        WHEN SUM(I.Quantidade) IS NULL THEN 0
+        ELSE SUM(I.Quantidade)
+    END As [Quantidade vendida]
+FROM
+    Produto AS P
+    LEFT JOIN Item_Pedido_Venda As I ON I.Codigo_Produto = P.Codigo
+WHERE 
+    I.Quantidade IS NULL 
+GROUP BY 
+     P.Codigo,
+     P.Nome

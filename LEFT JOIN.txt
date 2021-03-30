@@ -1,0 +1,29 @@
+SELECT
+    C.Nome,
+    CASE
+        WHEN F.Pontos IS NULL THEN 0
+        ELSE F.Pontos
+    END As Pontos_Cliente     
+FROM
+    Cliente As C
+    LEFT JOIN Fidelidade F ON C.Codigo = F.Codigo_Cliente
+ORDER BY 
+     F.Pontos DESC;
+
+
+
+
+SELECT
+    D.Nome_Fantasia As [Nome Distribuidor],
+    CASE
+        WHEN SUM(C.Valor) IS NULL THEN 0
+        ELSE SUM(C.Valor)
+    END As [Valor de Compra]  
+FROM
+    Distribuidor As D
+    LEFT JOIN Pedido_Compra As C ON D.Codigo = C.Codigo_Distribuidor
+GROUP BY 
+D.Nome_Fantasia,
+C.Valor
+ORDER BY
+[Valor de Compra];
